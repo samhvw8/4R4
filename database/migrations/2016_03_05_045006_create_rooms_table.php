@@ -17,8 +17,10 @@ class CreateRoomsTable extends Migration
             $table->integer('user_id');
             $table->bigInteger('price');
             $table->double('area');
-            $table->string('amenity');
+            $table->string('decripstion');
+            $table->string('image_album_url');
             $table->integer('room_add_id');
+            $table->integer('bed');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

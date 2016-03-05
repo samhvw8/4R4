@@ -17,7 +17,7 @@ class Room extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'price', 'area', 'level', 'amenity', 'room_add_id'
+        'user_id', 'price', 'area', 'decripstion', 'room_add_id', 'image_album_url', 'bed'
     ];
 
     /**
