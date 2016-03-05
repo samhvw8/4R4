@@ -11,6 +11,7 @@ class UserController extends Controller
 {
 
     /**
+     * Get all users in database
      * @return \Illuminate\Http\JsonResponse
      */
     public function all()
@@ -26,6 +27,7 @@ class UserController extends Controller
     }
 
     /**
+     * Create a user
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -47,6 +49,33 @@ class UserController extends Controller
 
         return response()->json([
             'status' => true,
+        ]);
+    }
+
+    /**
+     * Get user by id
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function get($id){
+
+        $user = User::find($id);
+
+        // if user not found
+
+        if($user == null) {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+
+        // user found
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'user' => $user
+            ]
         ]);
     }
 }
