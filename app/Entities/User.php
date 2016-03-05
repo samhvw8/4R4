@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone'
     ];
 
     /**
@@ -33,7 +33,8 @@ class User extends Authenticatable
      * Get all User's room
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function rooms() {
+    public function rooms()
+    {
         return $this->hasMany('Room');
     }
 }
