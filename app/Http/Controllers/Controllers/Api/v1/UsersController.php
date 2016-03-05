@@ -59,13 +59,14 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get($id){
+    public function get($id)
+    {
 
         $user = User::find($id);
 
         // if user not found
 
-        if($user == null) {
+        if ($user == null) {
             return response()->json([
                 'status' => false,
             ]);
@@ -78,6 +79,72 @@ class UserController extends Controller
             'data' => [
                 'user' => $user
             ]
+        ]);
+    }
+
+    /**
+     * Update User by ID
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        // if user not found
+
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+
+        // user found
+        $user['name'] = $request->input('name');
+        $user['email'] = $request->input('email');
+        $user['password'] = bcrypt($request->input('password'));
+        $user['phone'] = $request->input('phone');
+
+        if ($user->save())
+            // save ok
+            return response()->json([
+                'status' => true,
+            ]);
+
+        // save failed
+        return response()->json([
+            'status' => false,
+        ]);
+    }
+
+    /**
+     * Delete user by ID
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete($id)
+    {
+        $user = User::find($id);
+
+        // if user not found
+
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+
+
+        if ($user->delete())
+            // save ok
+            return response()->json([
+                'status' => true,
+            ]);
+
+        // save failed
+        return response()->json([
+            'status' => false,
         ]);
     }
 }

@@ -31,7 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-Route::group([['prefix' => 'api/v1']], function() {
+Route::group([['prefix' => 'api/v1']], function () {
 
     /**
      * Get all users
@@ -61,12 +61,18 @@ Route::group([['prefix' => 'api/v1']], function() {
     /**
      * Update user info
      */
-
+    Route::put('user/{id}', [
+        'as' => 'user.update',
+        'uses' => 'Api\v1\UsersController@update'
+    ]);
 
     /**
      * Delete user
      */
-
+    Route::delete('user/{id}', [
+        'as' => 'user.delete',
+        'uses' => 'Api\v1\UsersController@delete'
+    ]);
 //    =============================================================
 
     /**
@@ -107,7 +113,7 @@ Route::group([['prefix' => 'api/v1']], function() {
     /**
      * group search room
      */
-    Route::group([['prefix' => 'room/search']],function () {
+    Route::group([['prefix' => 'room/search']], function () {
         Route::post('near', [
             'as' => 'room.searchNear',
             'uses' => 'Api\v1\RoomsController@searchNear'
