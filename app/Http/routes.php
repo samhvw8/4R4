@@ -91,7 +91,7 @@ Route::group([['prefix' => 'api/v1']], function() {
      */
     Route::get('room/{id}', [
         'as' => 'room.get',
-        'uses' => 'Api\v1\RoomsController'
+        'uses' => 'Api\v1\RoomsController@get'
     ]);
 
     /**

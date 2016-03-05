@@ -107,22 +107,38 @@ class RoomsController extends Controller
         ]);
     }
 
-//    public function searchNear(Request $request)
-//    {
-//        $data = [
-//            'minPrice' => $request->input('minPrice'),
-//            'maxPrice' => $request->input('maxPrice'),
-//            'minArea' => $request->input('minArea'),
-//            'maxArea' => $request->input('maxArea'),
-//            'curLat' => $request->input('latitude'),
-//            'curLng' => $request->input('longitude'),
-//            'minBed' => $request->input('minBed'),
-//            'maxBed' => $request->input('maxBed'),
-//            'radius' => $request->input('radius'),
-//        ];
-//
-//        $room = Room::with('room_addresses')
-//    }
+    public function searchNear(Request $request)
+    {
+        $data = [
+            'minPrice' => $request->input('minPrice'),
+            'maxPrice' => $request->input('maxPrice'),
+            'minArea' => $request->input('minArea'),
+            'maxArea' => $request->input('maxArea'),
+            'curLat' => $request->input('latitude'),
+            'curLng' => $request->input('longitude'),
+            'minBed' => $request->input('minBed'),
+            'maxBed' => $request->input('maxBed'),
+            'radius' => $request->input('radius'),
+            'limit' => $request->input('limit'),
+        ];
+
+        $rooms = Room::with('room_addresses');
+        $returnRooms = [];
+        $returnRoomsNumber = 0;
+        foreach($rooms as $room){
+            $lat = $room['latitude'];
+            $lng = $room['latitude'];
+            $distance = 6371 * acos(sin($data['curLat']) * sin($lat) + cos($data['curLat']) * cos($lat) * cos($data['curLng'] - $lng));
+            if($distance < $data['radius']) {
+                $returnRooms.array_push($room);
+                $returnRoomsNumber += 1;
+            }
+            if($returnRoomsNumber > $data['limit'])
+                break;
+        }
+
+        return response()->json($returnRooms);
+    }
 
 //    private static function getDistance($lat1, $lng1, $lat2, $lng2, $unit = 'km')
 //    {

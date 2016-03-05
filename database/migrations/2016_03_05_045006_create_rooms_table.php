@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->integer('user_id');
             $table->bigInteger('price');
             $table->double('area');
-            $table->string('decripstion');
+            $table->string('decripstion')->nullable(true);
             $table->string('image_album_url');
             $table->integer('room_add_id');
             $table->integer('bed');
