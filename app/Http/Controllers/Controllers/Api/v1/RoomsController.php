@@ -127,7 +127,7 @@ class RoomsController extends Controller
         $returnRoomsNumber = 0;
         foreach($rooms as $room){
             $lat = $room['latitude'];
-            $lng = $room['latitude'];
+            $lng = $room['longitude'];
             $distance = 6371 * acos(sin($data['curLat']) * sin($lat) + cos($data['curLat']) * cos($lat) * cos($data['curLng'] - $lng));
             if($distance < $data['radius']) {
                 $returnRooms.array_push($room);
@@ -136,23 +136,9 @@ class RoomsController extends Controller
             if($returnRoomsNumber > $data['limit'])
                 break;
         }
-
+        //        if ($unit == 'km') $radius = 6371.009; // in kilometers
+//        elseif ($unit == 'mi') $radius = 3958.761; // in miles
+        //return $radius * acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($lng1 - $lng2));
         return response()->json($returnRooms);
     }
-
-//    private static function getDistance($lat1, $lng1, $lat2, $lng2, $unit = 'km')
-//    {
-//        // radius of earth; @note: the earth is not perfectly spherical, but this is considered the 'mean radius'
-//        if ($unit == 'km') $radius = 6371.009; // in kilometers
-//        elseif ($unit == 'mi') $radius = 3958.761; // in miles
-//
-//        // convert degrees to radians
-//        $lat1 = deg2rad((float)$lat1);
-//        $lng1 = deg2rad((float)$lng1);
-//        $lat2 = deg2rad((float)$lat2);
-//        $lng2 = deg2rad((float)$lng2);
-//
-//        // great circle distance formula
-//        return $radius * acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($lng1 - $lng2));
-//    }
 }
