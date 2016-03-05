@@ -30,7 +30,12 @@ class RoomAddress extends Model
 
     ];
 
-    public function room(){
+    /**
+     * Get Room from address
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function room()
+    {
         return $this->belongsTo('Room');
     }
 }

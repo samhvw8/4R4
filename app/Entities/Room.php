@@ -29,11 +29,18 @@ class Room extends Model
 
     ];
 
-
+    /**
+     * Get owner room
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user(){
         return $this->belongsTo('User', 'user_id');
     }
 
+    /**
+     * Get address of room
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function address() {
         return $this->hasOne('RoomAddress'. 'room_add_id');
     }

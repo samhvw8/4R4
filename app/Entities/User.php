@@ -28,4 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get all User's room
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rooms() {
+        return $this->hasMany('Room');
+    }
 }
