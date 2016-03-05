@@ -103,12 +103,18 @@ Route::group([['prefix' => 'api/v1']], function () {
     /**
      * Update room  info
      */
-
+    Route::put('user/{id}', [
+        'as' => 'room.update',
+        'uses' => 'Api\v1\RoomsController@update'
+    ]);
 
     /**
      * Delete room
      */
-
+    Route::delete('user/{id}', [
+        'as' => 'room.delete',
+        'uses' => 'Api\v1\RoomsController@delete'
+    ]);
 
     /**
      * group search room
