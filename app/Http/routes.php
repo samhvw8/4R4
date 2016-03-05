@@ -31,35 +31,87 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-/**
- * Get all users
- */
-Route::get('api/v1/users', [
-    'as' => 'user.all',
-    'uses' => 'Api\v1\UsersController@all'
-]);
+Route::group([['prefix' => 'api/v1']], function() {
 
-/**
- * Create a new user
- */
-Route::post('api/v1/user', [
-    'as' => 'user.create',
-    'uses' => 'Api\v1\UsersController@create'
-]);
+    /**
+     * Get all users
+     */
+    Route::get('users', [
+        'as' => 'user.all',
+        'uses' => 'Api\v1\UsersController@all'
+    ]);
+
+    /**
+     * Create a new user
+     */
+    Route::post('user', [
+        'as' => 'user.create',
+        'uses' => 'Api\v1\UsersController@create'
+    ]);
 
 
-/**
- * Get user info by id
- */
-Route::get('api/v1/user/{id}', [
-    'as' => 'user.get',
-    'uses' => 'Api\v1\UsersController@get'
-]);
+    /**
+     * Get user info by id
+     */
+    Route::get('user/{id}', [
+        'as' => 'user.get',
+        'uses' => 'Api\v1\UsersController@get'
+    ]);
 
-/**
- * Update user info
- */
+    /**
+     * Update user info
+     */
 
-/**
- * Delete user
- */
+
+    /**
+     * Delete user
+     */
+
+//    =============================================================
+
+    /**
+     * Get all rooms
+     */
+    Route::get('rooms', [
+        'as' => 'room.all',
+        'uses' => 'Api\v1\RoomsController@all'
+    ]);
+
+    /**
+     * Create a new room
+     */
+    Route::post('room', [
+        'as' => 'room.create',
+        'uses' => 'Api\v1\RoomsController@create'
+    ]);
+
+
+    /**
+     * Get room info by id
+     */
+    Route::get('room/{id}', [
+        'as' => 'room.get',
+        'uses' => 'Api\v1\RoomsController'
+    ]);
+
+    /**
+     * Update room  info
+     */
+
+
+    /**
+     * Delete room
+     */
+
+
+    /**
+     * group search room
+     */
+    Route::group([['prefix' => 'room/search']],function () {
+        Route::post('near', [
+            'as' => 'room.searchNear',
+            'uses' => 'Api\v1\RoomsController@searchNear'
+        ]);
+
+    });
+});
