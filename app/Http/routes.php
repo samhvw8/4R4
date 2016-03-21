@@ -31,11 +31,13 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-Route::group([['prefix' => 'api/v1']], function () {
+
+Route::group(['prefix' => 'api/v1'], function () {
 
     /**
      * Get all users
      */
+
     Route::get('users', [
         'as' => 'user.all',
         'uses' => 'Api\v1\UsersController@all'
