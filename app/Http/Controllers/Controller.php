@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Http\Controllers;
+namespace r4r\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

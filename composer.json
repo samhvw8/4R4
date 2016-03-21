@@ -20,7 +20,7 @@
             "database"
         ],
         "psr-4": {
-            "Wingi\\": "app/"
+            "r4r\\": "app/"
         }
     },
     "autoload-dev": {

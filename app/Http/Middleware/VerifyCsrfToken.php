@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Http\Middleware;
+namespace r4r\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

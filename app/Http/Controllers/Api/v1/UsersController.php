@@ -1,11 +1,11 @@
 <?php
 
-namespace Wingi\Http\Controllers\Api\v1;
+namespace r4r\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
-use Wingi\Entities\User;
-use Wingi\Http\Controllers\Controller;
-use Wingi\Http\Requests;
+use r4r\Entities\User;
+use r4r\Http\Controllers\Controller;
+use r4r\Http\Requests;
 
 class UsersController extends Controller
 {

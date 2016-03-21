@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Entities;
+namespace r4r\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

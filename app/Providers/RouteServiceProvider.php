@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Providers;
+namespace r4r\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Wingi\Http\Controllers';
+    protected $namespace = 'r4r\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

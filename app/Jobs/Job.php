@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Jobs;
+namespace r4r\Jobs;
 
 use Illuminate\Bus\Queueable;
 

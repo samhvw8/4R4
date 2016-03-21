@@ -1,10 +1,10 @@
 <?php
 
-namespace Wingi\Http\Controllers\Auth;
+namespace r4r\Http\Controllers\Auth;
 
-use Wingi\User;
+use r4r\User;
 use Validator;
-use Wingi\Http\Controllers\Controller;
+use r4r\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

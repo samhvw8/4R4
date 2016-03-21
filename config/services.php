@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => Wingi\User::class,
+        'model'  => r4r\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

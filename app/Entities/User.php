@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Entities;
+namespace r4r\Entities;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

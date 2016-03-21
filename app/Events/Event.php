@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Events;
+namespace r4r\Events;
 
 abstract class Event
 {

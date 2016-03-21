@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Console\Commands;
+namespace r4r\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Wingi\Http\Controllers\Auth;
+namespace r4r\Http\Controllers\Auth;
 
-use Wingi\Http\Controllers\Controller;
+use r4r\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

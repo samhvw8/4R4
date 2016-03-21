@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Exceptions;
+namespace r4r\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

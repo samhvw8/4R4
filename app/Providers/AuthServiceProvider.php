@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Providers;
+namespace r4r\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Wingi\Model' => 'Wingi\Policies\ModelPolicy',
+        'r4r\Model' => 'r4r\Policies\ModelPolicy',
     ];
 
     /**

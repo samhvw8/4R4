@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Providers;
+namespace r4r\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Wingi\Events\SomeEvent' => [
-            'Wingi\Listeners\EventListener',
+        'r4r\Events\SomeEvent' => [
+            'r4r\Listeners\EventListener',
         ],
     ];
 

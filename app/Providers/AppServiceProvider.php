@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Providers;
+namespace r4r\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

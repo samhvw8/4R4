@@ -1,6 +1,6 @@
 <?php
 
-namespace Wingi\Http\Requests;
+namespace r4r\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

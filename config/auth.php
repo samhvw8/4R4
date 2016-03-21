@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Wingi\User::class,
+            'model' => r4r\User::class,
         ],
 
         // 'users' => [

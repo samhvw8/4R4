@@ -1,12 +1,12 @@
 <?php
 
-namespace Wingi\Http\Controllers\Api\v1;
+namespace r4r\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
-use Wingi\Entities\Room;
-use Wingi\Entities\RoomAddress;
-use Wingi\Http\Controllers\Controller;
-use Wingi\Http\Requests;
+use r4r\Entities\Room;
+use r4r\Entities\RoomAddress;
+use r4r\Http\Controllers\Controller;
+use r4r\Http\Requests;
 
 class RoomsController extends Controller
 {
