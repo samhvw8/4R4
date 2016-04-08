@@ -68,10 +68,23 @@ class RoomsController extends Controller
 
         $room = new Room($data);
 
-        $user->rooms()->save($room);
+        try {
+            $user->rooms()->save($room);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
+            ]);
+        }
 
         return response()->json([
-            'status' => true
+            'status' => true,
+            'data' => [
+                $room
+            ]
         ]);
     }
 
@@ -135,20 +148,39 @@ class RoomsController extends Controller
             'city' => $request->input('city'),
         ];
 
-        if($room['user_id'] != $request->input('user_id')) {
+        if ($room['user_id'] != $request->input('user_id')) {
             $user = User::find($request->input('user_id'));
-            $user->rooms()->save($room)->save();
+
+            try {
+                $user->rooms()->save($room)->save();
+            } catch (\Illuminate\Database\QueryException $e) {
+                return response()->json([
+                    'status' => false,
+                    'data' => [
+                        'code' => $e->getCode(),
+                        'msg' => $e->errorInfo[2]
+                    ]
+                ]);
+            }
         }
 
-        if ($room->update($data))
-            // save ok
+        try {
+            $room->update($data);
+        } catch (\Illuminate\Database\QueryException $e) {
             return response()->json([
-                'status' => true,
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
             ]);
-
+        }
         // save failed
         return response()->json([
-            'status' => false,
+            'status' => true,
+            'data' => [
+                $room
+            ]
         ]);
     }
 
@@ -169,15 +201,22 @@ class RoomsController extends Controller
             ]);
         }
 
-        if ($room->delete())
-            // save ok
+        try {
+            $room->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
             return response()->json([
-                'status' => true,
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
             ]);
+        }
 
-        // save failed
+
+        // delete success
         return response()->json([
-            'status' => false,
+            'status' => true,
         ]);
     }
 
@@ -207,12 +246,12 @@ class RoomsController extends Controller
             $lng = $room['longitude'];
             $distance = 6371 * acos(sin($data['curLat']) * sin($lat) + cos($data['curLat']) * cos($lat) * cos($data['curLng'] - $lng));
             if ($distance <= $data['radius']) {
-                    if (($room['area'] >= $data['minArea']) && ($room['area'] <= $data['maxArea'])) {
-                        if (($room['price'] >= $data['minPrice']) && ($room['price'] <= $data['maxPrice'])) {
-                            $returnRooms . array_push($room);
-                            $returnRoomsNumber += 1;
-                        }
+                if (($room['area'] >= $data['minArea']) && ($room['area'] <= $data['maxArea'])) {
+                    if (($room['price'] >= $data['minPrice']) && ($room['price'] <= $data['maxPrice'])) {
+                        $returnRooms . array_push($room);
+                        $returnRoomsNumber += 1;
                     }
+                }
             }
             if ($returnRoomsNumber > $data['limit'])
                 break;
@@ -220,6 +259,16 @@ class RoomsController extends Controller
         //        if ($unit == 'km') $radius = 6371.009; // in kilometers
 //        elseif ($unit == 'mi') $radius = 3958.761; // in miles
         //return $radius * acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($lng1 - $lng2));
-        return response()->json($returnRooms);
+        if ($returnRooms->count() == 0) {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+        return response()->json([
+            'status' => true,
+            'data' => [
+                $returnRooms
+            ]
+        ]);
     }
 }

@@ -17,6 +17,11 @@ class UsersController extends Controller
     public function all()
     {
         $users = User::all();
+        if ($users->count() == 0)
+            return response()->json([
+                'status' => false,
+            ]);
+
 
         return response()->json([
             'status' => true,
@@ -40,17 +45,27 @@ class UsersController extends Controller
             'phone' => $request->input('phone'),
         ];
 
-        $user = new User([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'phone' => $request->input('phone'),
-        ]);
+        $user = new User($data);
 
-        $user->save();
+
+        try {
+            $user->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
+            ]);
+
+        }
 
         return response()->json([
             'status' => true,
+            'data' => [
+                $user
+            ]
         ]);
     }
 
@@ -106,15 +121,23 @@ class UsersController extends Controller
         $user['password'] = bcrypt($request->input('password'));
         $user['phone'] = $request->input('phone');
 
-        if ($user->save())
-            // save ok
-            return response()->json([
-                'status' => true,
-            ]);
 
-        // save failed
+        try {
+            $user->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
+            ]);
+        }
+
+        // save success
         return response()->json([
-            'status' => false,
+            'status' => true,
         ]);
     }
 
@@ -136,11 +159,17 @@ class UsersController extends Controller
         }
 
 
-        if ($user->delete())
-            // save ok
+        try {
+            $user->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
             return response()->json([
-                'status' => true,
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
             ]);
+        }
 
         // save failed
         return response()->json([
