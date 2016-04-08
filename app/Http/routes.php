@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
 Route::group(['prefix' => 'api/v1'], function () {
+    //    ====================== User ================================
 
     /**
      * Get all users
@@ -75,7 +76,7 @@ Route::group(['prefix' => 'api/v1'], function () {
         'as' => 'user.delete',
         'uses' => 'Api\v1\UsersController@delete'
     ]);
-//    =============================================================
+//    ====================== Room ================================
 
     /**
      * Get all rooms
@@ -105,7 +106,7 @@ Route::group(['prefix' => 'api/v1'], function () {
     /**
      * Update room  info
      */
-    Route::put('user/{id}', [
+    Route::put('room/{id}', [
         'as' => 'room.update',
         'uses' => 'Api\v1\RoomsController@update'
     ]);
@@ -113,7 +114,7 @@ Route::group(['prefix' => 'api/v1'], function () {
     /**
      * Delete room
      */
-    Route::delete('user/{id}', [
+    Route::delete('room/{id}', [
         'as' => 'room.delete',
         'uses' => 'Api\v1\RoomsController@delete'
     ]);
@@ -121,9 +122,10 @@ Route::group(['prefix' => 'api/v1'], function () {
     /**
      * group search room
      */
-    Route::group([['prefix' => 'room/search']], function () {
+
+    Route::group(['prefix' => 'room/search'], function () {
         Route::post('near', [
-            'as' => 'room.searchNear',
+            'as' => 'room.search.Near',
             'uses' => 'Api\v1\RoomsController@searchNear'
         ]);
 
