@@ -31,6 +31,6 @@ class Admin extends Model
      */
     public function user()
     {
-        return $this->hasOne('r4r\Entities\User', 'user_id');
+        return $this->belongsTo('r4r\Entities\User', 'user_id');
     }
 }

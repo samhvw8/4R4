@@ -39,10 +39,10 @@ class User extends Authenticatable
     }
 
     public function admin(){
-        return $this->belongsTo('r4r\Entities\Admin');
+        return $this->hasOne('r4r\Entities\Admin');
     }
 
     public function isAdmin(){
-        return $this->admin() ? true:false;
+        return ($this->admin()->get()->count() == 0)? false:true;
     }
 }

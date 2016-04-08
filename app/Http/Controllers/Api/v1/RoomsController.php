@@ -56,7 +56,10 @@ class RoomsController extends Controller
 
         if (!$user) {
             return response()->json([
-                'status' => false
+                'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
             ]);
         }
 
@@ -97,6 +100,9 @@ class RoomsController extends Controller
         if ($room == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'room id not found'
+                ]
             ]);
         }
 
@@ -125,6 +131,9 @@ class RoomsController extends Controller
         if ($room == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'room id not found'
+                ]
             ]);
         }
 
@@ -192,6 +201,9 @@ class RoomsController extends Controller
         if ($room == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'room id not found'
+                ]
             ]);
         }
 

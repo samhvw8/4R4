@@ -4,6 +4,7 @@ namespace r4r\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
 use r4r\Entities\User;
+use r4r\Entities\Admin;
 use r4r\Http\Controllers\Controller;
 use r4r\Http\Requests;
 
@@ -79,6 +80,9 @@ class UsersController extends Controller
         if ($user == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
             ]);
         }
 
@@ -107,6 +111,9 @@ class UsersController extends Controller
         if ($user == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
             ]);
         }
 
@@ -150,6 +157,9 @@ class UsersController extends Controller
         if ($user == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
             ]);
         }
 
@@ -182,6 +192,9 @@ class UsersController extends Controller
         if ($user == null) {
             return response()->json([
                 'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
             ]);
         }
 
@@ -193,6 +206,64 @@ class UsersController extends Controller
                 'rooms' => $rooms
             ]
         ]);
+
+    }
+
+    /**
+     * Make user become admin by id
+     * @param $id
+     * @return mixed
+     */
+    public function makeAdmin($id)
+    {
+        $user = User::find($id);
+
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
+            ]);
+        }
+
+        $admin = new Admin();
+        $admin->user()->associate($user)->save();
+
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'admin' => $admin
+            ]
+        ]);
+
+    }
+
+    /**
+     * Check User is admin ?
+     *
+     * @param $id
+     */
+    public function isAdmin($id){
+        $user = User::find($id);
+
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'admin' =>  $user->isAdmin()
+            ]
+        ]);
+
 
     }
 }

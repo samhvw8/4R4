@@ -85,6 +85,24 @@ Route::group(['prefix' => 'api/v1'], function () {
         'as' => 'user.getRoom',
         'uses' => 'Api\v1\UsersController@getRoom'
     ]);
+
+    /**
+     * Make user admin
+     */
+
+    Route::get('user/{id}/admin', [
+        'as' => 'user.makeAdmin',
+        'uses' => 'Api\v1\UsersController@makeAdmin'
+    ]);
+
+    /**
+     * Check user is admin ?
+     */
+
+    Route::get('user/{id}/isadmin', [
+        'as' => 'user.isAdmin',
+        'uses' => 'Api\v1\UsersController@isAdmin'
+    ]);
 //    ====================== Room ================================
 
     /**
