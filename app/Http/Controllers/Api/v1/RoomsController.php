@@ -19,12 +19,6 @@ class RoomsController extends Controller
     {
         $rooms = Room::all();
 
-        if ($rooms->count() == 0)
-            return response()->json([
-                'status' => false,
-            ]);
-
-
         return response()->json([
             'status' => true,
             'data' => [
@@ -83,7 +77,7 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                $room
+                'room' => $room
             ]
         ]);
     }
@@ -179,7 +173,7 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                $room
+                room => $room
             ]
         ]);
     }
@@ -259,15 +253,11 @@ class RoomsController extends Controller
         //        if ($unit == 'km') $radius = 6371.009; // in kilometers
 //        elseif ($unit == 'mi') $radius = 3958.761; // in miles
         //return $radius * acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($lng1 - $lng2));
-        if ($returnRooms->count() == 0) {
-            return response()->json([
-                'status' => false,
-            ]);
-        }
+
         return response()->json([
             'status' => true,
             'data' => [
-                $returnRooms
+                'room' => $returnRooms
             ]
         ]);
     }

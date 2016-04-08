@@ -17,11 +17,6 @@ class UsersController extends Controller
     public function all()
     {
         $users = User::all();
-        if ($users->count() == 0)
-            return response()->json([
-                'status' => false,
-            ]);
-
 
         return response()->json([
             'status' => true,
@@ -64,7 +59,7 @@ class UsersController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                $user
+                'user' => $user
             ]
         ]);
     }
@@ -176,4 +171,29 @@ class UsersController extends Controller
             'status' => false,
         ]);
     }
+
+    /**
+     * return user's room
+     */
+    public function getRoom($id)
+    {
+        $user = User::find($id);
+
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+            ]);
+        }
+
+        $rooms = $user->rooms();
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'rooms' => $rooms
+            ]
+        ]);
+
+    }
 }
+

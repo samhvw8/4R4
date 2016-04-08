@@ -76,6 +76,15 @@ Route::group(['prefix' => 'api/v1'], function () {
         'as' => 'user.delete',
         'uses' => 'Api\v1\UsersController@delete'
     ]);
+
+    /**
+     * Get user's rooms by id
+     */
+
+    Route::get('user/{id}/rooms', [
+        'as' => 'user.getRoom',
+        'uses' => 'Api\v1\UsersController@getRoom'
+    ]);
 //    ====================== Room ================================
 
     /**
