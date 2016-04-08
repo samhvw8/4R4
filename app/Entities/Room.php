@@ -4,6 +4,7 @@ namespace r4r\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Room extends Model
 {
     /**
@@ -17,7 +18,7 @@ class Room extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'price', 'area', 'decripstion', 'room_add_id', 'image_album_url', 'bed'
+        'price', 'area', 'decripstion',  'image_album_url', 'latitude', 'longitude', 'street', 'ward', 'district', 'city'
     ];
 
     /**
@@ -34,14 +35,6 @@ class Room extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(){
-        return $this->belongsTo('User', 'user_id');
-    }
-
-    /**
-     * Get address of room
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function address() {
-        return $this->hasOne('RoomAddress'. 'room_add_id');
+        return $this->belongsTo('r4r\Entities\User', 'user_id');
     }
 }

@@ -35,6 +35,14 @@ class User extends Authenticatable
      */
     public function rooms()
     {
-        return $this->hasMany('Room');
+        return $this->hasMany('r4r\Entities\Room');
+    }
+
+    public function admin(){
+        return $this->belongsTo('r4r\Entities\Admin');
+    }
+
+    public function isAdmin(){
+        return $this->admin() ? true:false;
     }
 }

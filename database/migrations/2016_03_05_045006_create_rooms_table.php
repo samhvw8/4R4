@@ -19,12 +19,15 @@ class CreateRoomsTable extends Migration
             $table->double('area');
             $table->string('decripstion')->nullable(true);
             $table->string('image_album_url');
-            $table->integer('room_add_id');
-            $table->integer('bed');
+            $table->double('latitude');
+            $table->double('longitude');
+            $table->string('street');
+            $table->string('district');
+            $table->string('ward');
+            $table->string('city');
+            
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('room_add_id')->references('id')->on('room_addresses');
         });
     }
 

@@ -4,21 +4,16 @@ namespace r4r\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RoomAddress extends Model
+class Admin extends Model
 {
-
-    /**
-     * The table used by the model.
-     * @var string
-     */
-    protected $table = 'room_addresses';
+    protected $table = 'admins';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'latitude', 'longitude', 'district', 'street', 'ward',
+
     ];
 
     /**
@@ -31,11 +26,11 @@ class RoomAddress extends Model
     ];
 
     /**
-     * Get Room from address
+     * get admin infomation
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function room()
+    public function user()
     {
-        return $this->belongsTo('Room');
+        return $this->hasOne('r4r\Entities\User', 'user_id');
     }
 }
