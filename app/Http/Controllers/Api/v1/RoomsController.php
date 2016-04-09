@@ -22,6 +22,7 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
+                'total' => $rooms->count(),
                 'rooms' => $rooms,
             ],
         ]);
@@ -178,7 +179,7 @@ class RoomsController extends Controller
                 ]
             ]);
         }
-        // save failed
+
         return response()->json([
             'status' => true,
             'data' => [
@@ -270,7 +271,7 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                'numberOfroom' => $returnRoomsNumber,
+                'total' => $returnRoomsNumber,
                 'room' => $returnRooms
             ]
         ]);
@@ -312,7 +313,7 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                'Total_room' => $room->count(),
+                'total' => $room->count(),
                 'room' => $room
             ]
         ]);
