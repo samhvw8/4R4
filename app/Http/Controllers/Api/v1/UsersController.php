@@ -183,7 +183,7 @@ class UsersController extends Controller
     }
 
     /**
-     * return user's room
+     * return user's rooms
      */
     public function getRoom($id)
     {
@@ -198,7 +198,7 @@ class UsersController extends Controller
             ]);
         }
 
-        $rooms = $user->rooms();
+        $rooms = $user->rooms()->get();
 
         return response()->json([
             'status' => true,
