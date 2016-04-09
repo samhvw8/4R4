@@ -4,7 +4,7 @@ namespace r4r\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
 use r4r\Entities\User;
-use r4r\Entities\Admin;
+use r4r\Entities\Admin as Admin;
 use r4r\Http\Controllers\Controller;
 use r4r\Http\Requests;
 
@@ -22,6 +22,7 @@ class UsersController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
+                'total' => $users->count(),
                 'users' => $users
             ]
         ]);
@@ -203,12 +204,29 @@ class UsersController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
+                'total' => $rooms->count(),
                 'rooms' => $rooms
             ]
         ]);
 
     }
 
+    /**
+     * return admin list
+     * @return mixed
+     */
+    public function allAdmin()
+    {
+        $admins = Admin::all();
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'total' => $admins->count(),
+                '$admins' => $admins
+            ]
+        ]);
+    }
     /**
      * Make user become admin by id
      * @param $id
@@ -239,13 +257,39 @@ class UsersController extends Controller
         ]);
 
     }
+    /**
+     * Delete role admin of user
+     * @param $id
+     * @return mixed
+     */
+    public function delAdmin($id)
+    {
+        $user = User::find($id);
+
+        if ($user == null) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'user id not found'
+                ]
+            ]);
+        }
+
+        $user->admin()->delete();
+
+        return response()->json([
+            'status' => true,
+        ]);
+
+    }
 
     /**
      * Check User is admin ?
      *
      * @param $id
      */
-    public function isAdmin($id){
+    public function isAdmin($id)
+    {
         $user = User::find($id);
 
         if ($user == null) {
@@ -260,11 +304,9 @@ class UsersController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                'admin' =>  $user->isAdmin()
+                'admin' => $user->isAdmin()
             ]
         ]);
-
-
     }
 }
 

@@ -85,6 +85,15 @@ Route::group(['prefix' => 'api/v1'], function () {
         'as' => 'user.getRoom',
         'uses' => 'Api\v1\UsersController@getRoom'
     ]);
+    /**
+     * Get all admins
+     */
+
+    Route::get('admins', [
+        'as' => 'user.allAdmin',
+        'uses' => 'Api\v1\UsersController@allAdmin'
+    ]);
+
 
     /**
      * Make user admin
@@ -93,6 +102,13 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::get('user/{id}/admin', [
         'as' => 'user.makeAdmin',
         'uses' => 'Api\v1\UsersController@makeAdmin'
+    ]);
+    /**
+     * Delete admin
+     */
+    Route::get('user/{id}/deladmin', [
+        'as' => 'user.delAdmin',
+        'uses' => 'Api\v1\UsersController@delAdmin'
     ]);
 
     /**
