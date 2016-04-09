@@ -151,10 +151,19 @@ Route::group(['prefix' => 'api/v1'], function () {
      */
 
     Route::group(['prefix' => 'room/search'], function () {
+        /**
+         * search nearby
+         */
         Route::post('near', [
             'as' => 'room.search.Near',
             'uses' => 'Api\v1\RoomsController@searchNear'
         ]);
-
+        /**
+         * search address
+         */
+        Route::post('address', [
+            'as' => 'room.search.address',
+            'uses' => 'Api\v1\RoomsController@searchAddress'
+        ]);
     });
 });

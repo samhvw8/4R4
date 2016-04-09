@@ -245,6 +245,7 @@ class RoomsController extends Controller
         ];
 
         $rooms = Room::all();
+        //Room::chunk(500, functioncallback());
         $returnRooms = [];
         $returnRoomsNumber = 0;
         foreach ($rooms as $room) {
@@ -254,7 +255,7 @@ class RoomsController extends Controller
             if ($distance <= $data['radius']) {
                 if (($room['area'] >= $data['minArea']) && ($room['area'] <= $data['maxArea'])) {
                     if (($room['price'] >= $data['minPrice']) && ($room['price'] <= $data['maxPrice'])) {
-                        $returnRooms . array_push($room);
+                        array_push($returnRooms, $room);
                         $returnRoomsNumber += 1;
                     }
                 }
@@ -269,7 +270,50 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
+                'numberOfroom' => $returnRoomsNumber,
                 'room' => $returnRooms
+            ]
+        ]);
+    }
+
+    /**
+     * return list of rooms has address like input
+     * @param Request $request
+     * @return mixed
+     */
+    public function searchAddress(Request $request)
+    {
+        $datas = [
+            'district' => $request->input('district'),
+            'street' => $request->input('street'),
+            'ward' => $request->input('ward'),
+            'city' => $request->input('city'),
+        ];
+
+        $datas = array_filter($datas, function ($var) {
+            if ($var == NULL || $var == "")
+                return false;
+            return true;
+        });
+
+        $room = [];
+        $flag = 0;
+        foreach ($datas as $key => $value) {
+            if ($flag == 0) {
+                $room = Room::where($key, 'LIKE', $value);
+                $flag = 1;
+            } else {
+                $room = $room->where($key, 'LIKE', $value);
+            }
+        }
+
+        $room = $room->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'Total_room' => $room->count(),
+                'room' => $room
             ]
         ]);
     }
