@@ -340,7 +340,8 @@ class RoomsController extends Controller
             $room['latitude'] = $latitude;
             $room['longitude'] = $longitude;
             $room->save();
-            
+
         }
+        echo "Done Update address";
     }
 }
