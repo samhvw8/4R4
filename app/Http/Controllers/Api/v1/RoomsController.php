@@ -318,4 +318,29 @@ class RoomsController extends Controller
             ]
         ]);
     }
+
+    public function updateAdress()
+    {
+        $rooms = Room::all();
+
+        foreach ($rooms as $room) {
+            if ($room['latitude'] != null && $room['latitude'] != '')
+                continue;
+            $address = implode(' ', [$room['street'], $room['district'], $room['ward'], $room['city']]);
+            $address = urlencode($address);
+            $url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false";
+
+            $response = file_get_contents($url);
+
+            $output = json_decode($response);
+
+            $latitude = $output->results[0]->geometry->location->lat;
+            $longitude = $output->results[0]->geometry->location->lng;
+
+            $room['latitude'] = $latitude;
+            $room['longitude'] = $longitude;
+            $room->save();
+            
+        }
+    }
 }

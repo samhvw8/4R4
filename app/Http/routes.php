@@ -31,7 +31,6 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-
 Route::group(['prefix' => 'api/v1'], function () {
     //    ====================== User ================================
 
@@ -160,6 +159,12 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::delete('room/{id}', [
         'as' => 'room.delete',
         'uses' => 'Api\v1\RoomsController@delete'
+    ]);
+
+
+    Route::get('room_update_addess', [
+        'as' => 'room.update_address',
+        'uses' => 'Api\v1\RoomsController@updateAdress'
     ]);
 
     /**
