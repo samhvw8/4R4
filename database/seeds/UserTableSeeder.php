@@ -20,6 +20,14 @@ class UserTableSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
+        DB::table('users')->insert([
+            'name' => "Son Dao",
+            'phone' => "01633460820",
+            'email' => "sondaoduy@gmail.com",
+            'password' => bcrypt("w8c8aaff"),
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
         $faker = Faker::create();
         $faker->seed(time());
         foreach (range(1, 100) as $index) {

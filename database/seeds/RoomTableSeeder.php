@@ -32,12 +32,14 @@ class RoomTableSeeder extends Seeder
                     'city' => 'Hanoi',
                     'created_at' => new DateTime(),
                     'updated_at' => new DateTime()
+
                 ]);
             } catch (Illuminate\Database\QueryException $e) {
 
             } catch (PDOException $ee) {
 
             }
+            sleep(3);
         }
 
         $streets_ba_dinh = ['An Xa', 'Ba Huyen Thanh Quan', 'Bac Son', 'Buoi', 'Cao Ba Quat', 'Cau Giay', 'Chau Long', 'Chu Van An', 'Chua Mot Cot', 'Cua Bac', 'Dang Dung', 'Dang Tat', 'Dao Tan', 'Dien Bien Phu', 'Doc Lap', 'Doc Ngu', 'Doi Can', 'Doi Nhan', 'Giang Van Minh', 'Giang Vo', 'Hang Bun', 'Hang Dau', 'Hang Than', 'Hoang Dieu', 'Hoang Hoa Tham', 'Hoang Van Thu', 'Hoe Nhai', 'Hong Ha', 'Hong Phuc', 'Hung Vuong', 'Huynh Thuc Khang', 'Khuc Hao', 'Kim Ma', 'Kim Ma Thuong', 'La Thanh', 'Lac Chinh', 'Lang Ha', 'Le Duan', 'Le Hong Phong', 'Le Truc', 'Lieu Giai', 'Linh Lang', 'Ly Nam De', 'Mac Dinh Chi', 'Mai Anh Tuan', 'Nam Cao', 'Nam Trang', 'Nghia Dung', 'Ngoc Ha', 'Ngoc Khanh', 'Ngu Xa', 'Nguyen Bieu', 'Nguyen Canh Chan', 'Nguyen Chi Thanh', 'Nguyen Cong Hoan', 'Nguyen Hong', 'Nguyen Khac Hieu', 'Nguyen Khac Nhu', 'Nguyen Pham Tuan', 'Nguyen Thai Hoc', 'Nguyen Thiep', 'Nguyen Tri Phuong', 'Nguyen Trung Truc', 'Nguyen Truong To', 'Nguyen Van Ngoc', 'Nui Truc', 'Ong Ich Khiem', 'Pham Hong Thai', 'Pham Huy Thong', 'Phan Dinh Phung', 'Phan Huy Ich', 'Phan Ke Binh', 'Pho Duc Chinh', 'Phuc Xa', 'Quan Ngua', 'Quan Thanh', 'Son Tay', 'Tan Ap', 'Thanh Bao', 'Thanh Cong', 'Thanh Nien', 'Ton That Dam', 'Ton That Thiep', 'Tran Huy Lieu', 'Tran Phu', 'Tran Te Xuong', 'Tran Vu', 'Truc Bach', 'Van Bao', 'Van Cao', 'Van Phuc', 'Vinh Phuc', 'Yen Ninh', 'Yen Phu', 'Yen The'];
@@ -63,6 +65,7 @@ class RoomTableSeeder extends Seeder
             } catch (PDOException $ee) {
 
             }
+            sleep(3);
         }
 
         $streets_hai_ba_truong = ['8-3', 'Ba Trieu', 'Bach Dang', 'Bach Mai', 'Bui Ngoc Duong', 'Bui Thi Xuan', 'Cam Hoi', 'Cao Dat', 'Chua Vua', 'Dai Co Viet', 'Dai La', 'Do Hanh', 'Do Ngoc Du', 'Doan Tran Nghiep', 'Doi Cung', 'Dong Mac', 'Dong Nhan', 'Giai Phong', 'Han Thuyen', 'Hang Chuoi', 'Ho Xuan Huong', 'Hoa Lu', 'Hoa Ma', 'Hoang Mai', 'Hong Mai', 'Hue', 'Huong Vien', 'Kim Nguu', 'Lac Trung', 'Lang Yen', 'Le Dai Hanh', 'Le Duan', 'Le Gia Dinh', 'Le Ngoc Han', 'Le Quy Don', 'Le Thanh Nghi', 'Le Van Huu', 'Lien Tri', 'Lo Duc', 'Luong Yen', 'Mac Thi Buoi', 'Mai Hac De', 'Minh Khai', 'Ngo Thi Nham', 'Nguyen An Ninh', 'Nguyen Binh Khiem', 'Nguyen Cao', 'Nguyen Cong Tru', 'Nguyen Dinh Chieu', 'Nguyen Du', 'Nguyen Hien', 'Nguyen Huy Tu', 'Nguyen Khoai', 'Nguyen Quyen', 'Nguyen Thuong Hien', 'Nguyen Trung Ngan', 'Pham Dinh Ho', 'Phu Dong Thien Vuong', 'Phung Khac Khoan', 'Quang Trung', 'Quynh Loi', 'Quynh Mai', 'Ta Quang Buu', 'Tam Trinh', 'Tang Bat Ho', 'Tay Ket', 'Thai Phien', 'Thanh Nhan', 'The Giao', 'Thi Sach', 'Thien Quang', 'Thinh Yen', 'Tho Lao', 'To Hien Thanh', 'Tran Binh Trong', 'Tran Cao Van', 'Tran Dai Nghia', 'Tran Hung Dao', 'Tran Khanh Du', 'Tran Khat Chan', 'Tran Nhan Tong', 'Tran Thanh Tong', 'Tran Xuan Soan', 'Trieu Viet Vuong', 'Truong Dinh', 'Truong Han Sieu', 'Tue Tinh', 'Tuong Mai', 'Van Don', 'Van Ho', 'Van Kiep', 'Vinh Tuy', 'Vo Thi Sau', 'Vong', 'Vu Huu Loi', 'Yen Bai', 'Yen Lac', 'Yersin', 'Yet Kieu'];
@@ -88,6 +91,7 @@ class RoomTableSeeder extends Seeder
             } catch (PDOException $ee) {
 
             }
+            sleep(3);
         }
     }
 }

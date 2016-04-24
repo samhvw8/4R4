@@ -87,16 +87,17 @@ Route::group([
         'as' => 'user.getRoom',
         'uses' => 'Api\v1\UsersController@getRoom'
     ]);
-    /**
-     * Get all admins
-     */
 
-    Route::get('admins', [
-        'as' => 'user.allAdmin',
-        'uses' => 'Api\v1\UsersController@allAdmin'
-    ]);
 
     Route::group(['middleware' => 'r4r\Http\Middleware\AdminCheck'], function () {
+        /**
+         * Get all admins
+         */
+
+        Route::get('admins', [
+            'as' => 'user.allAdmin',
+            'uses' => 'Api\v1\UsersController@allAdmin'
+        ]);
         /**
          * Make user admin
          */

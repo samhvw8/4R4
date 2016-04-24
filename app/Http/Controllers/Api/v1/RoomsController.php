@@ -17,8 +17,7 @@ class RoomsController extends Controller
      */
     public function all()
     {
-        $rooms = Room::all();
-
+        $rooms = Room::orderBy('created_at', 'desc')->get();
         return response()->json([
             'status' => true,
             'data' => [
@@ -26,6 +25,7 @@ class RoomsController extends Controller
                 'rooms' => $rooms,
             ],
         ]);
+
     }
 
     /**
@@ -301,10 +301,10 @@ class RoomsController extends Controller
         $flag = 0;
         foreach ($datas as $key => $value) {
             if ($flag == 0) {
-                $room = Room::where($key, 'LIKE', $value);
+                $room = Room::where($key, 'ilike', '%'.$value.'%');
                 $flag = 1;
             } else {
-                $room = $room->where($key, 'LIKE', $value);
+                $room = $room->where($key, 'ilike', '%'.$value.'%');
             }
         }
 
