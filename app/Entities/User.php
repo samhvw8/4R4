@@ -45,7 +45,7 @@ class User extends Authenticatable
     public function isAdmin(){
         return ($this->admin()->get()->count() == 0)? false:true;
     }
-    
+
     // this is a recommended way to declare event handlers
     protected static function boot() {
         parent::boot();

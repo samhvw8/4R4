@@ -227,6 +227,7 @@ class UsersController extends Controller
             ]
         ]);
     }
+
     /**
      * Make user become admin by id
      * @param $id
@@ -246,8 +247,18 @@ class UsersController extends Controller
         }
 
         $admin = new Admin();
-        $admin->user()->associate($user)->save();
 
+        try {
+            $admin->user()->associate($user)->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
+            ]);
+        }
 
         return response()->json([
             'status' => true,
@@ -257,6 +268,7 @@ class UsersController extends Controller
         ]);
 
     }
+
     /**
      * Delete role admin of user
      * @param $id

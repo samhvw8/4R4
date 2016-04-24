@@ -31,7 +31,10 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-Route::group(['prefix' => 'api/v1'], function () {
+Route::group([
+    'prefix' => 'api/v1',
+    'middleware' => 'auth.basic'
+], function () {
     //    ====================== User ================================
 
     /**
@@ -93,22 +96,24 @@ Route::group(['prefix' => 'api/v1'], function () {
         'uses' => 'Api\v1\UsersController@allAdmin'
     ]);
 
+    Route::group(['middleware' => 'r4r\Http\Middleware\AdminCheck'], function () {
+        /**
+         * Make user admin
+         */
 
-    /**
-     * Make user admin
-     */
+        Route::get('user/{id}/admin', [
+            'as' => 'user.makeAdmin',
+            'uses' => 'Api\v1\UsersController@makeAdmin'
+        ]);
 
-    Route::get('user/{id}/admin', [
-        'as' => 'user.makeAdmin',
-        'uses' => 'Api\v1\UsersController@makeAdmin'
-    ]);
-    /**
-     * Delete admin
-     */
-    Route::get('user/{id}/deladmin', [
-        'as' => 'user.delAdmin',
-        'uses' => 'Api\v1\UsersController@delAdmin'
-    ]);
+        /**
+         * Delete admin
+         */
+        Route::get('user/{id}/deladmin', [
+            'as' => 'user.delAdmin',
+            'uses' => 'Api\v1\UsersController@delAdmin'
+        ]);
+    });
 
     /**
      * Check user is admin ?
@@ -118,6 +123,8 @@ Route::group(['prefix' => 'api/v1'], function () {
         'as' => 'user.isAdmin',
         'uses' => 'Api\v1\UsersController@isAdmin'
     ]);
+
+
 //    ====================== Room ================================
 
     /**

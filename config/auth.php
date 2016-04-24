@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => r4r\User::class,
+            'model' => r4r\Entities\User::class,
         ],
 
         // 'users' => [

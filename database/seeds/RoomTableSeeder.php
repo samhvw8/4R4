@@ -20,20 +20,20 @@ class RoomTableSeeder extends Seeder
         $wards_dong_da = ['Cat Linh', 'Hang Bot', 'Kham Thien', 'Khuong Thuong', 'Kim Lien', 'Lang Ha', 'Lang Thuong', 'Nam Dong', 'Nga Tu So', 'O Cho Dua', 'Phuong Lien', 'Phuong Mai', 'Quang Trung', 'Quoc Tu Giam', 'Thinh [Quang', 'Tho Quan', 'Trung Liet', 'Trung Phung', 'Trung Tu', 'Van Chuong', 'Van Mieu'];
         foreach (range(1, 10) as $index) {
             try {
-            DB::table('rooms')->insert([
-                'user_id' => rand(1, 100),
-                'price' => rand(100000, 10000000),
-                'area' => rand(10 * 10, 100 * 10) / 10,
-                'decripstion' => $faker->text(150),
-                'image_album_url' => $faker->imageUrl(),
-                'street' => rand(1, 100) . ' ' . $streets_dong_da[array_rand($streets_dong_da)],
-                'district' => 'Dong Da',
-                'ward' => $wards_dong_da[array_rand($wards_dong_da)],
-                'city' => 'Hanoi',
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime()
-            ]);
-            } catch(Illuminate\Database\QueryException $e){
+                DB::table('rooms')->insert([
+                    'user_id' => rand(1, 100),
+                    'price' => rand(100000, 10000000),
+                    'area' => rand(10 * 10, 100 * 10) / 10,
+                    'decripstion' => $faker->text(150),
+                    'image_album_url' => $faker->imageUrl(),
+                    'street' => rand(1, 100) . ' ' . $streets_dong_da[array_rand($streets_dong_da)],
+                    'district' => 'Dong Da',
+                    'ward' => $wards_dong_da[array_rand($wards_dong_da)],
+                    'city' => 'Hanoi',
+                    'created_at' => new DateTime(),
+                    'updated_at' => new DateTime()
+                ]);
+            } catch (Illuminate\Database\QueryException $e) {
 
             } catch (PDOException $ee) {
 
@@ -45,45 +45,45 @@ class RoomTableSeeder extends Seeder
 
         foreach (range(1, 10) as $index) {
             try {
-            DB::table('rooms')->insert([
-                'user_id' => rand(1, 100),
-                'price' => rand(100000, 10000000),
-                'area' => rand(10 * 10, 100 * 10) / 10,
-                'decripstion' => $faker->text(150),
-                'image_album_url' => $faker->imageUrl(),
-                'street' => rand(1, 100) . ' ' . $streets_ba_dinh[array_rand($streets_ba_dinh)],
-                'district' => 'Ba Dinh',
-                'ward' => $wards_ba_dinh[array_rand($wards_ba_dinh)],
-                'city' => 'Hanoi',
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime()
-            ]);
-            } catch(Illuminate\Database\QueryException $e){
+                DB::table('rooms')->insert([
+                    'user_id' => rand(1, 100),
+                    'price' => rand(100000, 10000000),
+                    'area' => rand(10 * 10, 100 * 10) / 10,
+                    'decripstion' => $faker->text(150),
+                    'image_album_url' => $faker->imageUrl(),
+                    'street' => rand(1, 100) . ' ' . $streets_ba_dinh[array_rand($streets_ba_dinh)],
+                    'district' => 'Ba Dinh',
+                    'ward' => $wards_ba_dinh[array_rand($wards_ba_dinh)],
+                    'city' => 'Hanoi',
+                    'created_at' => new DateTime(),
+                    'updated_at' => new DateTime()
+                ]);
+            } catch (Illuminate\Database\QueryException $e) {
 
             } catch (PDOException $ee) {
 
             }
         }
 
-        $streets_hai_ba_truong = ['8-3','Ba Trieu','Bach Dang','Bach Mai','Bui Ngoc Duong','Bui Thi Xuan','Cam Hoi','Cao Dat','Chua Vua','Dai Co Viet','Dai La','Do Hanh','Do Ngoc Du','Doan Tran Nghiep','Doi Cung','Dong Mac','Dong Nhan','Giai Phong','Han Thuyen','Hang Chuoi','Ho Xuan Huong','Hoa Lu','Hoa Ma','Hoang Mai','Hong Mai','Hue','Huong Vien','Kim Nguu','Lac Trung','Lang Yen','Le Dai Hanh','Le Duan','Le Gia Dinh','Le Ngoc Han','Le Quy Don','Le Thanh Nghi','Le Van Huu','Lien Tri','Lo Duc','Luong Yen','Mac Thi Buoi','Mai Hac De','Minh Khai','Ngo Thi Nham','Nguyen An Ninh','Nguyen Binh Khiem','Nguyen Cao','Nguyen Cong Tru','Nguyen Dinh Chieu','Nguyen Du','Nguyen Hien','Nguyen Huy Tu','Nguyen Khoai','Nguyen Quyen','Nguyen Thuong Hien','Nguyen Trung Ngan','Pham Dinh Ho','Phu Dong Thien Vuong','Phung Khac Khoan','Quang Trung','Quynh Loi','Quynh Mai','Ta Quang Buu','Tam Trinh','Tang Bat Ho','Tay Ket','Thai Phien','Thanh Nhan','The Giao','Thi Sach','Thien Quang','Thinh Yen','Tho Lao','To Hien Thanh','Tran Binh Trong','Tran Cao Van','Tran Dai Nghia','Tran Hung Dao','Tran Khanh Du','Tran Khat Chan','Tran Nhan Tong','Tran Thanh Tong','Tran Xuan Soan','Trieu Viet Vuong','Truong Dinh','Truong Han Sieu','Tue Tinh','Tuong Mai','Van Don','Van Ho','Van Kiep','Vinh Tuy','Vo Thi Sau','Vong','Vu Huu Loi','Yen Bai','Yen Lac','Yersin','Yet Kieu'];
+        $streets_hai_ba_truong = ['8-3', 'Ba Trieu', 'Bach Dang', 'Bach Mai', 'Bui Ngoc Duong', 'Bui Thi Xuan', 'Cam Hoi', 'Cao Dat', 'Chua Vua', 'Dai Co Viet', 'Dai La', 'Do Hanh', 'Do Ngoc Du', 'Doan Tran Nghiep', 'Doi Cung', 'Dong Mac', 'Dong Nhan', 'Giai Phong', 'Han Thuyen', 'Hang Chuoi', 'Ho Xuan Huong', 'Hoa Lu', 'Hoa Ma', 'Hoang Mai', 'Hong Mai', 'Hue', 'Huong Vien', 'Kim Nguu', 'Lac Trung', 'Lang Yen', 'Le Dai Hanh', 'Le Duan', 'Le Gia Dinh', 'Le Ngoc Han', 'Le Quy Don', 'Le Thanh Nghi', 'Le Van Huu', 'Lien Tri', 'Lo Duc', 'Luong Yen', 'Mac Thi Buoi', 'Mai Hac De', 'Minh Khai', 'Ngo Thi Nham', 'Nguyen An Ninh', 'Nguyen Binh Khiem', 'Nguyen Cao', 'Nguyen Cong Tru', 'Nguyen Dinh Chieu', 'Nguyen Du', 'Nguyen Hien', 'Nguyen Huy Tu', 'Nguyen Khoai', 'Nguyen Quyen', 'Nguyen Thuong Hien', 'Nguyen Trung Ngan', 'Pham Dinh Ho', 'Phu Dong Thien Vuong', 'Phung Khac Khoan', 'Quang Trung', 'Quynh Loi', 'Quynh Mai', 'Ta Quang Buu', 'Tam Trinh', 'Tang Bat Ho', 'Tay Ket', 'Thai Phien', 'Thanh Nhan', 'The Giao', 'Thi Sach', 'Thien Quang', 'Thinh Yen', 'Tho Lao', 'To Hien Thanh', 'Tran Binh Trong', 'Tran Cao Van', 'Tran Dai Nghia', 'Tran Hung Dao', 'Tran Khanh Du', 'Tran Khat Chan', 'Tran Nhan Tong', 'Tran Thanh Tong', 'Tran Xuan Soan', 'Trieu Viet Vuong', 'Truong Dinh', 'Truong Han Sieu', 'Tue Tinh', 'Tuong Mai', 'Van Don', 'Van Ho', 'Van Kiep', 'Vinh Tuy', 'Vo Thi Sau', 'Vong', 'Vu Huu Loi', 'Yen Bai', 'Yen Lac', 'Yersin', 'Yet Kieu'];
         $wards_hai_ba_truong = ['Khuong Thuong', 'Bach Dang', 'Bach Khoa', 'Bach Mai', 'Bui Thi Xuan', 'Cau Den', 'Dong Mac', 'Dong Nhan', 'Dong Tam', 'Le Dai Hanh', 'Minh Khai', 'Ngo Thi Nham', 'Nguyen Du', 'Pham Dinh Ho', 'Pho Hue', 'Quynh Loi', 'Quynh Mai', 'Thanh Luong', 'Thanh Nhan', 'Truong Dinh', 'Vinh Tuy'];
 
         foreach (range(1, 10) as $index) {
             try {
-            DB::table('rooms')->insert([
-                'user_id' => rand(1, 100),
-                'price' => rand(100000, 10000000),
-                'area' => rand(10 * 10, 100 * 10) / 10,
-                'decripstion' => $faker->text(150),
-                'image_album_url' => $faker->imageUrl(),
-                'street' => rand(1, 100) . ' ' . $streets_hai_ba_truong[array_rand($streets_hai_ba_truong)],
-                'district' => 'Hai Ba Trung',
-                'ward' => $wards_hai_ba_truong[array_rand($wards_hai_ba_truong)],
-                'city' => 'Hanoi',
-                'created_at' => new DateTime(),
-                'updated_at' => new DateTime()
-            ]);
-            } catch(Illuminate\Database\QueryException $e){
+                DB::table('rooms')->insert([
+                    'user_id' => rand(1, 100),
+                    'price' => rand(100000, 10000000),
+                    'area' => rand(10 * 10, 100 * 10) / 10,
+                    'decripstion' => $faker->text(150),
+                    'image_album_url' => $faker->imageUrl(),
+                    'street' => rand(1, 100) . ' ' . $streets_hai_ba_truong[array_rand($streets_hai_ba_truong)],
+                    'district' => 'Hai Ba Trung',
+                    'ward' => $wards_hai_ba_truong[array_rand($wards_hai_ba_truong)],
+                    'city' => 'Hanoi',
+                    'created_at' => new DateTime(),
+                    'updated_at' => new DateTime()
+                ]);
+            } catch (Illuminate\Database\QueryException $e) {
 
             } catch (PDOException $ee) {
 

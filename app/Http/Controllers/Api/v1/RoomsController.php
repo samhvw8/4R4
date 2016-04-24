@@ -322,7 +322,7 @@ class RoomsController extends Controller
     public function updateAdress()
     {
         $rooms = Room::all();
-
+//        $count = 0;
         foreach ($rooms as $room) {
             if ($room['latitude'] != null && $room['latitude'] != '')
                 continue;
@@ -340,8 +340,9 @@ class RoomsController extends Controller
             $room['latitude'] = $latitude;
             $room['longitude'] = $longitude;
             $room->save();
-
+//            $count = $count + 1;
         }
-        echo "Done Update address";
+        echo "Done Update address - ";
+//        echo $count;
     }
 }
