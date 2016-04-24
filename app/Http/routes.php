@@ -115,16 +115,6 @@ Route::group([
         ]);
     });
 
-    /**
-     * Check user is admin ?
-     */
-
-    Route::get('user/{id}/isadmin', [
-        'as' => 'user.isAdmin',
-        'uses' => 'Api\v1\UsersController@isAdmin'
-    ]);
-
-
 //    ====================== Room ================================
 
     /**
