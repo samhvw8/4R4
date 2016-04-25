@@ -18,7 +18,7 @@ class RoomsController extends Controller
      */
     public function all()
     {
-        $limit = Input::get('limit')?:10;
+        $limit = Input::get('limit') ?: 10;
         $rooms = Room::orderBy('created_at', 'desc')->paginate($limit);
         return response()->json([
             'status' => true,
@@ -132,7 +132,7 @@ class RoomsController extends Controller
     {
         $room = Room::find($id);
 
-        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
+        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
 
             return response()->json([
                 'status' => false,
@@ -212,7 +212,7 @@ class RoomsController extends Controller
     {
         $room = Room::find($id);
 
-        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
+        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
 
             return response()->json([
                 'status' => false,
@@ -270,25 +270,52 @@ class RoomsController extends Controller
             'limit' => $request->input('limit'),
         ];
 
-        $rooms = Room::all();
+
         //Room::chunk(500, functioncallback());
-        $returnRooms = [];
-        $returnRoomsNumber = 0;
-        foreach ($rooms as $room) {
-            $lat = $room['latitude'];
-            $lng = $room['longitude'];
-            $distance = 6371 * acos(sin($data['curLat']) * sin($lat) + cos($data['curLat']) * cos($lat) * cos($data['curLng'] - $lng));
-            if ($distance <= $data['radius']) {
-                if (($room['area'] >= $data['minArea']) && ($room['area'] <= $data['maxArea'])) {
-                    if (($room['price'] >= $data['minPrice']) && ($room['price'] <= $data['maxPrice'])) {
-                        array_push($returnRooms, $room);
-                        $returnRoomsNumber += 1;
-                    }
-                }
-            }
-            if ($returnRoomsNumber > $data['limit'])
-                break;
+
+        
+        $rooms = Room::query();
+        $rooms = $rooms->distance($data['curLat'], $data['curLng'], $data['radius']);
+
+        if ($data['minPrice'] != null && $data['minPrice'] != '') {
+            $rooms = $rooms->where('price', '>=', $data['minPrice']);
         }
+
+        if ($data['maxPrice'] != null && $data['maxPrice'] != '') {
+            $rooms = $rooms->where('price', '<=', $data['maxPrice']);
+        }
+
+        if ($data['minArea'] != null && $data['minArea'] != '') {
+            $rooms = $rooms->where('area', '>=', $data['minArea']);
+        }
+
+        if ($data['maxArea'] != null && $data['maxArea'] != '') {
+            $rooms = $rooms->where('area', '<=', $data['maxArea']);
+        }
+        if ($data['limit'] != null && $data['limit'] != '') {
+            $rooms = $rooms->take($data['limit']);
+        }
+
+//        dd(get_class_methods($rooms));
+
+//        dd(get_class_methods($room));
+//
+//
+//        foreach ($rooms as $room) {
+//            $lat = $room['latitude'];
+//            $lng = $room['longitude'];
+//            $distance = 6371 * acos(sin($data['curLat']) * sin($lat) + cos($data['curLat']) * cos($lat) * cos($data['curLng'] - $lng));
+//            if ($distance <= $data['radius']) {
+//                if (($room['area'] >= $data['minArea']) && ($room['area'] <= $data['maxArea'])) {
+//                    if (($room['price'] >= $data['minPrice']) && ($room['price'] <= $data['maxPrice'])) {
+//                        array_push($returnRooms, $room);
+//                        $returnRoomsNumber += 1;
+//                    }
+//                }
+//            }
+//            if ($returnRoomsNumber > $data['limit'])
+//                break;
+//        }
         //        if ($unit == 'km') $radius = 6371.009; // in kilometers
 //        elseif ($unit == 'mi') $radius = 3958.761; // in miles
         //return $radius * acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($lng1 - $lng2));
@@ -296,8 +323,7 @@ class RoomsController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                'total' => $returnRoomsNumber,
-                'room' => $returnRooms
+                'room' => $rooms->get()
             ]
         ]);
     }
@@ -332,7 +358,6 @@ class RoomsController extends Controller
 
         $room = Room::query();
         $flag = 0;
-
 
 
         try {
