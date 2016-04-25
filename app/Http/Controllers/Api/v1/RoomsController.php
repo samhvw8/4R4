@@ -127,6 +127,16 @@ class RoomsController extends Controller
     {
         $room = Room::find($id);
 
+        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
+
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'Don\'t have permisson'
+                ]
+            ], 403);
+        }
+
         // if room not found
 
         if ($room == null) {
@@ -197,7 +207,17 @@ class RoomsController extends Controller
     {
         $room = Room::find($id);
 
+        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
+
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'Don\'t have permisson'
+                ]
+            ], 403);
+        }
         // if room not found
+
 
         if ($room == null) {
             return response()->json([

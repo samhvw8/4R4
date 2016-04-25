@@ -18,7 +18,8 @@ class UsersController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                'user' => $user
+                'user' => $user,
+                'admin' => $user->isadmin()
             ]
         ]);
     }
@@ -118,6 +119,16 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
+        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
+
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'Don\'t have permisson'
+                ]
+            ], 403);
+        }
+        
         // if user not found
 
         if ($user == null) {
@@ -163,7 +174,16 @@ class UsersController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
-        if(\Auth::user()->isAdmin() == true || \Auth::user()->id == $id)
+
+        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
+
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'msg' => 'Don\'t have permisson'
+                ]
+            ], 403);
+        }
 
         // if user not found
 
