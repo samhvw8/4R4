@@ -37,6 +37,14 @@ Route::group(['prefix' => 'api/v1'], function () {
         //    ====================== User ================================
 
         /**
+         * Login User
+         */
+        Route::get('login',[
+            'as' => 'user.login',
+            'uses' => 'Api\v1\UsersController@login'
+        ]);
+
+        /**
          * Get all users
          */
 
@@ -45,13 +53,7 @@ Route::group(['prefix' => 'api/v1'], function () {
             'uses' => 'Api\v1\UsersController@all'
         ]);
 
-        /**
-         * Create a new user
-         */
-        Route::post('user', [
-            'as' => 'user.create',
-            'uses' => 'Api\v1\UsersController@create'
-        ]);
+
 
         /**
          * Update user info
@@ -141,6 +143,13 @@ Route::group(['prefix' => 'api/v1'], function () {
 
     });
 
+    /**
+     * Create a new user
+     */
+    Route::post('user', [
+        'as' => 'user.create',
+        'uses' => 'Api\v1\UsersController@create'
+    ]);
     /**
      * Get user info by id
      */

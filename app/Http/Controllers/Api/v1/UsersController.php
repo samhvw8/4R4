@@ -11,6 +11,17 @@ use r4r\Http\Requests;
 class UsersController extends Controller
 {
 
+    public function login(){
+        $user = \Auth::user();
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'user' => $user
+            ]
+        ]);
+    }
+
     /**
      * Get all users in database
      * @return \Illuminate\Http\JsonResponse
@@ -38,12 +49,11 @@ class UsersController extends Controller
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password' => bcrypt($request->input('password')),
             'phone' => $request->input('phone'),
         ];
 
         $user = new User($data);
-
 
         try {
             $user->save();
