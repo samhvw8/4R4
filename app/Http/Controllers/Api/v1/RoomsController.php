@@ -61,7 +61,7 @@ class RoomsController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         $room = new Room($data);
@@ -75,7 +75,7 @@ class RoomsController extends Controller
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
         }
 
         return response()->json([
@@ -104,7 +104,7 @@ class RoomsController extends Controller
                 'data' => [
                     'msg' => 'room id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         // user room
@@ -135,7 +135,7 @@ class RoomsController extends Controller
                 'data' => [
                     'msg' => 'room id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         $data = [
@@ -164,7 +164,7 @@ class RoomsController extends Controller
                         'code' => $e->getCode(),
                         'msg' => $e->errorInfo[2]
                     ]
-                ]);
+                ], 500);
             }
         }
 
@@ -177,13 +177,13 @@ class RoomsController extends Controller
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
         }
 
         return response()->json([
             'status' => true,
             'data' => [
-                room => $room
+                'room' => $room
             ]
         ]);
     }
@@ -205,7 +205,7 @@ class RoomsController extends Controller
                 'data' => [
                     'msg' => 'room id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         try {
@@ -217,7 +217,7 @@ class RoomsController extends Controller
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
         }
 
 

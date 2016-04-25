@@ -54,7 +54,7 @@ class UsersController extends Controller
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
 
         }
 
@@ -84,7 +84,7 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         // user found
@@ -115,7 +115,7 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         // user found
@@ -135,7 +135,7 @@ class UsersController extends Controller
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
         }
 
         // save success
@@ -161,25 +161,26 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
 
         try {
             $user->delete();
         } catch (\Illuminate\Database\QueryException $e) {
+            // delete failed
             return response()->json([
                 'status' => false,
                 'data' => [
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
         }
 
-        // save failed
+        // delete success
         return response()->json([
-            'status' => false,
+            'status' => true,
         ]);
     }
 
@@ -196,7 +197,7 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         $rooms = $user->rooms()->get();
@@ -243,7 +244,7 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         $admin = new Admin();
@@ -257,7 +258,7 @@ class UsersController extends Controller
                     'code' => $e->getCode(),
                     'msg' => $e->errorInfo[2]
                 ]
-            ]);
+            ], 500);
         }
 
         return response()->json([
@@ -284,7 +285,7 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         $user->admin()->delete();
@@ -310,7 +311,7 @@ class UsersController extends Controller
                 'data' => [
                     'msg' => 'user id not found'
                 ]
-            ]);
+            ], 404);
         }
 
         return response()->json([
