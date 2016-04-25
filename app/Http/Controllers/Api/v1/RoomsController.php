@@ -305,7 +305,7 @@ class RoomsController extends Controller
         });
 
 
-        $room = [];
+        $room = Room::query();
         $flag = 0;
 
 
@@ -319,6 +319,7 @@ class RoomsController extends Controller
                     $room = $room->where($key, 'ilike', '%' . $value . '%');
                 }
             }
+
 
             if ($priceArea['minPrice'] != null && $priceArea['minPrice'] != '') {
                 $room = $room->where('price', '>=', $priceArea['minPrice']);
