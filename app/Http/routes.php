@@ -108,7 +108,7 @@ Route::group(['prefix' => 'api/v1'], function () {
             ]);
 
 
-            Route::get('room_update_addess', [
+            Route::get('room_update_address', [
                 'as' => 'room.update_address',
                 'uses' => 'Api\v1\RoomsController@updateAdress'
             ]);
