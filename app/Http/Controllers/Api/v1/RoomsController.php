@@ -3,6 +3,7 @@
 namespace r4r\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request as Request;
+use Illuminate\Support\Facades\Input;
 use r4r\Entities\Room as Room;
 use r4r\Entities\User as User;
 use r4r\Http\Controllers\Controller as Controller;
@@ -17,12 +18,16 @@ class RoomsController extends Controller
      */
     public function all()
     {
-        $rooms = Room::orderBy('created_at', 'desc')->get();
+        $limit = Input::get('limit')?:10;
+        $rooms = Room::orderBy('created_at', 'desc')->paginate($limit);
         return response()->json([
             'status' => true,
             'data' => [
-                'total' => $rooms->count(),
-                'rooms' => $rooms,
+                'total_count' => $rooms->total(),
+                'total_pages' => $rooms->lastPage(),
+                'current_page' => $rooms->currentPage(),
+                'per_page' => $rooms->perPage(),
+                'rooms' => $rooms->items(),
             ],
         ]);
 

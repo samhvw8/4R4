@@ -3,6 +3,7 @@
 namespace r4r\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use r4r\Entities\User;
 use r4r\Entities\Admin as Admin;
 use r4r\Http\Controllers\Controller;
@@ -30,13 +31,16 @@ class UsersController extends Controller
      */
     public function all()
     {
-        $users = User::all();
-
+        $limit = Input::get('limit')?:10;
+        $users = User::paginate($limit);
         return response()->json([
             'status' => true,
             'data' => [
-                'total' => $users->count(),
-                'users' => $users
+                'total_count' => $users->total(),
+                'total_pages' => $users->lastPage(),
+                'current_page' => $users->currentPage(),
+                'per_page' => $users->perPage(),
+                'users' => $users->items(),
             ]
         ]);
     }
@@ -119,7 +123,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
+        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
 
             return response()->json([
                 'status' => false,
@@ -128,7 +132,7 @@ class UsersController extends Controller
                 ]
             ], 403);
         }
-        
+
         // if user not found
 
         if ($user == null) {
@@ -175,7 +179,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        if(\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
+        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
 
             return response()->json([
                 'status' => false,
