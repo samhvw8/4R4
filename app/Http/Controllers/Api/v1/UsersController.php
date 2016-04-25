@@ -163,6 +163,7 @@ class UsersController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
+        if(\Auth::user()->isAdmin() == true || \Auth::user()->id == $id)
 
         // if user not found
 

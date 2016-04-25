@@ -308,6 +308,8 @@ class RoomsController extends Controller
         $room = [];
         $flag = 0;
 
+
+
         try {
             foreach ($datas as $key => $value) {
                 if ($flag == 0) {
@@ -319,14 +321,18 @@ class RoomsController extends Controller
             }
 
             if ($priceArea['minPrice'] != null && $priceArea['minPrice'] != '') {
-                $room = $room->where('price', '>', $priceArea['minPrice']);
-                $room = $room->where('price', '<', $priceArea['maxPrice']);
+                $room = $room->where('price', '>=', $priceArea['minPrice']);
+            }
+            if ($priceArea['maxPrice'] != null && $priceArea['maxPrice'] != '') {
+                $room = $room->where('price', '<=', $priceArea['maxPrice']);
+            }
+            if ($priceArea['minArea'] != null && $priceArea['minArea'] != '') {
+                $room = $room->where('area', '>=', $priceArea['minArea']);
+            }
+            if ($priceArea['maxArea'] != null && $priceArea['maxArea'] != '') {
+                $room = $room->where('area', '<=', $priceArea['maxArea']);
             }
 
-            if ($priceArea['minArea'] != null && $priceArea['minArea'] != '') {
-                $room = $room->where('price', '>', $priceArea['minArea']);
-                $room = $room->where('price', '<', $priceArea['maxArea']);
-            }
         } catch (\Illuminate\Database\QueryException $e) {
             return response()->json([
                 'status' => false,
