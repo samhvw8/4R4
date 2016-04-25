@@ -305,27 +305,38 @@ class RoomsController extends Controller
         });
 
 
-
         $room = [];
         $flag = 0;
-        foreach ($datas as $key => $value) {
-            if ($flag == 0) {
-                $room = Room::where($key, 'ilike', '%'.$value.'%');
-                $flag = 1;
-            } else {
-                $room = $room->where($key, 'ilike', '%'.$value.'%');
+
+        try {
+            foreach ($datas as $key => $value) {
+                if ($flag == 0) {
+                    $room = Room::where($key, 'ilike', '%' . $value . '%');
+                    $flag = 1;
+                } else {
+                    $room = $room->where($key, 'ilike', '%' . $value . '%');
+                }
             }
+
+            if ($priceArea['minPrice'] != null && $priceArea['minPrice'] != '') {
+                $room = $room->where('price', '>', $priceArea['minPrice']);
+                $room = $room->where('price', '<', $priceArea['maxPrice']);
+            }
+
+            if ($priceArea['minArea'] != null && $priceArea['minArea'] != '') {
+                $room = $room->where('price', '>', $priceArea['minArea']);
+                $room = $room->where('price', '<', $priceArea['maxArea']);
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'status' => false,
+                'data' => [
+                    'code' => $e->getCode(),
+                    'msg' => $e->errorInfo[2]
+                ]
+            ], 500);
         }
 
-        if($priceArea['minPrice'] != null && $priceArea['minPrice'] != '') {
-            $room = $room->where('price', '>', $priceArea['minPrice']);
-            $room = $room->where('price', '<', $priceArea['maxPrice']);
-        }
-
-        if($priceArea['minArea'] != null && $priceArea['minArea'] != '') {
-            $room = $room->where('price', '>', $priceArea['minArea']);
-            $room = $room->where('price', '<', $priceArea['maxArea']);
-        }
 
         $room = $room->get();
 

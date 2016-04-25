@@ -11,7 +11,8 @@ use r4r\Http\Requests;
 class UsersController extends Controller
 {
 
-    public function login(){
+    public function login()
+    {
         $user = \Auth::user();
 
         return response()->json([
