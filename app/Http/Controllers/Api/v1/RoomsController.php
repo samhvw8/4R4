@@ -282,7 +282,7 @@ class RoomsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function searchAddress(Request $request)
+    public function searchRealestate(Request $request)
     {
         $datas = [
             'district' => $request->input('district'),

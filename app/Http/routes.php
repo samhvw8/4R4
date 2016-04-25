@@ -191,9 +191,9 @@ Route::group(['prefix' => 'api/v1'], function () {
         /**
          * search address
          */
-        Route::post('address', [
-            'as' => 'room.search.address',
-            'uses' => 'Api\v1\RoomsController@searchAddress'
+        Route::post('realestate', [
+            'as' => 'room.search.realestate',
+            'uses' => 'Api\v1\RoomsController@searchRealestate'
         ]);
     });
 
