@@ -288,14 +288,23 @@ class RoomsController extends Controller
             'district' => $request->input('district'),
             'street' => $request->input('street'),
             'ward' => $request->input('ward'),
-            'city' => $request->input('city'),
+            'city' => $request->input('city')
+        ];
+
+        $priceArea = [
+            'minPrice' => $request->input('minPrice'),
+            'maxPrice' => $request->input('maxPrice'),
+            'minArea' => $request->input('minArea'),
+            'maxArea' => $request->input('maxArea')
         ];
 
         $datas = array_filter($datas, function ($var) {
-            if ($var == NULL || $var == "")
+            if ($var == NULL || $var == '')
                 return false;
             return true;
         });
+
+
 
         $room = [];
         $flag = 0;
@@ -306,6 +315,16 @@ class RoomsController extends Controller
             } else {
                 $room = $room->where($key, 'ilike', '%'.$value.'%');
             }
+        }
+
+        if($priceArea['minPrice'] != null && $priceArea['minPrice'] != '') {
+            $room = $room->where('price', '>', $priceArea['minPrice']);
+            $room = $room->where('price', '<', $priceArea['maxPrice']);
+        }
+
+        if($priceArea['minArea'] != null && $priceArea['minArea'] != '') {
+            $room = $room->where('price', '>', $priceArea['minArea']);
+            $room = $room->where('price', '<', $priceArea['maxArea']);
         }
 
         $room = $room->get();
