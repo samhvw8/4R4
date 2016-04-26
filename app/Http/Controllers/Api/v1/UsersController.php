@@ -20,7 +20,7 @@ class UsersController extends Controller
             'status' => true,
             'data' => [
                 'user' => $user,
-                'admin' => $user->isadmin()
+                'admin' => $user->isAdmin()
             ]
         ]);
     }
@@ -40,6 +40,8 @@ class UsersController extends Controller
                 'total_pages' => $users->lastPage(),
                 'current_page' => $users->currentPage(),
                 'per_page' => $users->perPage(),
+                'url_next' => $users->nextPageUrl(),
+                'url_prev' => $users->previousPageUrl(),
                 'users' => $users->items(),
             ]
         ]);

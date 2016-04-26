@@ -20,6 +20,7 @@ class RoomsController extends Controller
     {
         $limit = Input::get('limit') ?: 10;
         $rooms = Room::orderBy('created_at', 'desc')->paginate($limit);
+
         return response()->json([
             'status' => true,
             'data' => [
@@ -27,6 +28,8 @@ class RoomsController extends Controller
                 'total_pages' => $rooms->lastPage(),
                 'current_page' => $rooms->currentPage(),
                 'per_page' => $rooms->perPage(),
+                'url_next' => $rooms->nextPageUrl(),
+                'url_prev' => $rooms->previousPageUrl(),
                 'rooms' => $rooms->items(),
             ],
         ]);
@@ -273,7 +276,7 @@ class RoomsController extends Controller
 
         //Room::chunk(500, functioncallback());
 
-        
+
         $rooms = Room::query();
         $rooms = $rooms->distance($data['curLat'], $data['curLng'], $data['radius']);
 
