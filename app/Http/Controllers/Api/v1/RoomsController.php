@@ -60,7 +60,7 @@ class RoomsController extends Controller
             'city' => $request->input('city'),
         ];
 
-        $user = User::find($request->input('user_id'));
+        $user = \Auth::user();
 
 
         if (!$user) {
