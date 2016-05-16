@@ -86,6 +86,8 @@ class RoomsController extends Controller
             ], 500);
         }
 
+        updateAdress();
+
         return response()->json([
             'status' => true,
             'data' => [
