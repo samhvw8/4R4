@@ -24,7 +24,7 @@ class RoomTableSeeder extends Seeder
                     'user_id' => rand(1, 100),
                     'price' => rand(100000, 10000000),
                     'area' => rand(10 * 10, 100 * 10) / 10,
-                    'decripstion' => $faker->text(150),
+                    'description' => $faker->text(150),
                     'image_album_url' => $faker->imageUrl(),
                     'street' => rand(1, 100) . ' ' . $streets_dong_da[array_rand($streets_dong_da)],
                     'district' => 'Dong Da',

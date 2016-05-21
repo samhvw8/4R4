@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->integer('user_id');
             $table->bigInteger('price');
             $table->double('area');
-            $table->string('decripstion')->nullable(true);
+            $table->string('description')->nullable(true);
             $table->string('image_album_url')->nullable(true);
             $table->double('latitude')->nullable(true);
             $table->double('longitude')->nullable(true);

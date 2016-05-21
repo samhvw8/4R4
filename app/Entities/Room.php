@@ -18,7 +18,7 @@ class Room extends Model
      * @var array
      */
     protected $fillable = [
-        'price', 'area', 'decripstion', 'image_album_url', 'latitude', 'longitude', 'street', 'ward', 'district', 'city'
+        'price', 'area', 'description', 'image_album_url', 'latitude', 'longitude', 'street', 'ward', 'district', 'city'
     ];
 
     /**
@@ -41,6 +41,7 @@ class Room extends Model
 
     public function ScopeDistance($query, $from_latitude, $from_longitude, $distance)
     {
+
 //        dd( $from_latitude, $from_longitude, $distance);
         // This will calculate the distance in km
         // if you want in miles use 3959 instead of 6371

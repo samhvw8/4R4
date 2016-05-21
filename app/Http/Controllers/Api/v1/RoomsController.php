@@ -50,7 +50,7 @@ class RoomsController extends Controller
 //            'user_id' => $request->input('user_id'),
             'price' => $request->input('price'),
             'area' => $request->input('area'),
-            'decripstion' => $request->input('decripstion'),
+            'description' => $request->input('description'),
             'image_album_url' => $request->input('image_album_url'),
             'latitude' => $request->input('latitude'),
             'longitude' => $request->input('longitude'),
@@ -162,7 +162,7 @@ class RoomsController extends Controller
 //           'user_id' => $request->input('user_id'),
             'price' => $request->input('price'),
             'area' => $request->input('area'),
-            'decripstion' => $request->input('decripstion'),
+            'description' => $request->input('description'),
             'image_album_url' => $request->input('image_album_url'),
             'latitude' => $request->input('latitude'),
             'longitude' => $request->input('longitude'),
@@ -275,12 +275,12 @@ class RoomsController extends Controller
             'limit' => $request->input('limit'),
         ];
 
-
         //Room::chunk(500, functioncallback());
 
 
         $rooms = Room::query();
         $rooms = $rooms->distance($data['curLat'], $data['curLng'], $data['radius']);
+
 
         if ($data['minPrice'] != null && $data['minPrice'] != '') {
             $rooms = $rooms->where('price', '>=', $data['minPrice']);
@@ -301,29 +301,7 @@ class RoomsController extends Controller
             $rooms = $rooms->take($data['limit']);
         }
 
-//        dd(get_class_methods($rooms));
-
-//        dd(get_class_methods($room));
-//
-//
-//        foreach ($rooms as $room) {
-//            $lat = $room['latitude'];
-//            $lng = $room['longitude'];
-//            $distance = 6371 * acos(sin($data['curLat']) * sin($lat) + cos($data['curLat']) * cos($lat) * cos($data['curLng'] - $lng));
-//            if ($distance <= $data['radius']) {
-//                if (($room['area'] >= $data['minArea']) && ($room['area'] <= $data['maxArea'])) {
-//                    if (($room['price'] >= $data['minPrice']) && ($room['price'] <= $data['maxPrice'])) {
-//                        array_push($returnRooms, $room);
-//                        $returnRoomsNumber += 1;
-//                    }
-//                }
-//            }
-//            if ($returnRoomsNumber > $data['limit'])
-//                break;
-//        }
-        //        if ($unit == 'km') $radius = 6371.009; // in kilometers
-//        elseif ($unit == 'mi') $radius = 3958.761; // in miles
-        //return $radius * acos(sin($lat1) * sin($lat2) + cos($lat1) * cos($lat2) * cos($lng1 - $lng2));
+//        dd($rooms);
 
         return response()->json([
             'status' => true,
