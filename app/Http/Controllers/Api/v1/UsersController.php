@@ -125,7 +125,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $id) {
+
+        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $user->id) {
 
             return response()->json([
                 'status' => false,
@@ -147,14 +148,26 @@ class UsersController extends Controller
         }
 
         // user found
-        $user['name'] = $request->input('name');
-        $user['email'] = $request->input('email');
-        $user['password'] = bcrypt($request->input('password'));
-        $user['phone'] = $request->input('phone');
 
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'phone' => $request->input('phone'),
+        ];
+
+        $data = array_filter($data, function ($var) {
+            if ($var == NULL || $var == "")
+                return false;
+            return true;
+        });
+
+        if($data['password'] != null || $data['password'] != '' ) {
+            $data['password'] = bcrypt($data['password']);
+        }
 
         try {
-            $user->save();
+            $user->update($data);
         } catch (\Illuminate\Database\QueryException $e) {
 
             return response()->json([
