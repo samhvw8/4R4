@@ -156,13 +156,15 @@ class UsersController extends Controller
             'phone' => $request->input('phone'),
         ];
 
+
+
         $data = array_filter($data, function ($var) {
-            if ($var == NULL || $var == "")
+            if ($var == NULL || $var == '')
                 return false;
             return true;
         });
 
-        if($data['password'] != null || $data['password'] != '' ) {
+        if(array_key_exists('password', $data)) {
             $data['password'] = bcrypt($data['password']);
         }
 

@@ -47,7 +47,6 @@ class RoomsController extends Controller
 //        'latitude', 'longitude', 'district', 'street', 'ward',
 
         $data = [
-//            'user_id' => $request->input('user_id'),
             'price' => $request->input('price'),
             'area' => $request->input('area'),
             'description' => $request->input('description'),
