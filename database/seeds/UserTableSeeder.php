@@ -13,10 +13,10 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => "Sam Hoang",
-            'phone' => "01633460820",
-            'email' => "samhv.ict@gmail.com",
-            'password' => bcrypt("w8c8aaff"),
+            'name' => "Admin",
+            'phone' => "666",
+            'email' => "admin",
+            'password' => bcrypt("admin"),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
             'name' => "Son Dao",
             'phone' => "01633460820",
             'email' => "sondaoduy@gmail.com",
-            'password' => bcrypt("w8c8aaff"),
+            'password' => bcrypt("test"),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -35,7 +35,7 @@ class UserTableSeeder extends Seeder
                 'name' => $faker->name,
                 'phone' => $faker->phoneNumber,
                 'email' => $faker->email,
-                'password' => bcrypt($faker->password(4, 60)),
+                'password' => bcrypt(1111),
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime()
             ]);
