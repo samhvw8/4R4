@@ -137,7 +137,8 @@ class RoomsController extends Controller
     {
         $room = Room::find($id);
 
-        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->userid) {
+
+        if (\Auth::user()->isAdmin() != true  && \Auth::user()->id != $room->user_id) {
 
             return response()->json([
                 'status' => false,
@@ -159,7 +160,6 @@ class RoomsController extends Controller
         }
 
         $data = [
-//           'user_id' => $request->input('user_id'),
             'price' => $request->input('price'),
             'area' => $request->input('area'),
             'description' => $request->input('description'),
@@ -172,21 +172,11 @@ class RoomsController extends Controller
             'city' => $request->input('city'),
         ];
 
-        if ($room['user_id'] != $request->input('user_id')) {
-            $user = User::find($request->input('user_id'));
-
-            try {
-                $user->rooms()->save($room)->save();
-            } catch (\Illuminate\Database\QueryException $e) {
-                return response()->json([
-                    'status' => false,
-                    'data' => [
-                        'code' => $e->getCode(),
-                        'msg' => $e->errorInfo[2]
-                    ]
-                ], 500);
-            }
-        }
+        $data = array_filter($data, function ($var) {
+            if ($var == NULL || $var == '')
+                return false;
+            return true;
+        });
 
         try {
             $room->update($data);
@@ -217,6 +207,8 @@ class RoomsController extends Controller
     {
         $room = Room::find($id);
 
+
+
         // if room not found
         if ($room == null) {
             return response()->json([
@@ -227,7 +219,7 @@ class RoomsController extends Controller
             ], 404);
         }
 
-        if (\Auth::user()->isAdmin() != true && \Auth::user() == $room->user()) {
+        if (\Auth::user()->isAdmin() != true && \Auth::user()->id != $room->user_id) {
 
             return response()->json([
                 'status' => false,
