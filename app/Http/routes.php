@@ -107,12 +107,6 @@ Route::group(['prefix' => 'api/v1'], function () {
                 'uses' => 'Api\v1\UsersController@delAdmin'
             ]);
 
-
-            Route::get('room_update_address', [
-                'as' => 'room.update_address',
-                'uses' => 'Api\v1\RoomsController@updateAdress'
-            ]);
-
         });
 
 //    ====================== Room ================================
@@ -167,6 +161,11 @@ Route::group(['prefix' => 'api/v1'], function () {
         'uses' => 'Api\v1\RoomsController@all'
     ]);
 
+
+    Route::get('room_update_address', [
+        'as' => 'room.update_address',
+        'uses' => 'Api\v1\RoomsController@updateAdress'
+    ]);
 
     /**
      * Get room info by id
