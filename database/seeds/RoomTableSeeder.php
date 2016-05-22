@@ -23,7 +23,7 @@ class RoomTableSeeder extends Seeder
         foreach (range(1, 20) as $index) {
             try {
                 DB::table('rooms')->insert([
-                    'user_id' => rand(1, 100),
+                    'user_id' => rand(60, 100),
                     'price' => rand(100000, 10000000),
                     'area' => rand(10 * 10, 100 * 10) / 10,
                     'description' => $faker->text(150),
@@ -48,7 +48,7 @@ class RoomTableSeeder extends Seeder
         foreach (range(1, 20) as $index) {
             try {
                 DB::table('rooms')->insert([
-                    'user_id' => rand(1, 100),
+                    'user_id' => rand(30, 60),
                     'price' => rand(100000, 10000000),
                     'area' => rand(10 * 10, 100 * 10) / 10,
                     'description' => $faker->text(150),
@@ -75,7 +75,7 @@ class RoomTableSeeder extends Seeder
         foreach (range(1, 20) as $index) {
             try {
                 DB::table('rooms')->insert([
-                    'user_id' => rand(1, 100),
+                    'user_id' => rand(1, 30),
                     'price' => rand(100000, 10000000),
                     'area' => rand(10 * 10, 100 * 10) / 10,
                     'description' => $faker->text(150),
