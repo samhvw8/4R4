@@ -73,6 +73,20 @@ class RoomsController extends Controller
 
         $room = new Room($data);
 
+        $address = implode(' ', [$room['street'], $room['district'], $room['ward'], $room['city']]);
+        $address = urlencode($address);
+        $url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false";
+
+        $response = file_get_contents($url);
+
+        $output = json_decode($response);
+
+        $latitude = $output->results[0]->geometry->location->lat;
+        $longitude = $output->results[0]->geometry->location->lng;
+
+        $room['latitude'] = $latitude;
+        $room['longitude'] = $longitude;
+
         try {
             $user->rooms()->save($room);
         } catch (\Illuminate\Database\QueryException $e) {
@@ -84,8 +98,6 @@ class RoomsController extends Controller
                 ]
             ], 500);
         }
-
-        $this->updateAdress();
 
         return response()->json([
             'status' => true,
