@@ -84,9 +84,10 @@ class RoomsController extends Controller
             $latitude = $output->results[0]->geometry->location->lat;
             $longitude = $output->results[0]->geometry->location->lng;
 
-            $room['latitude'] = $latitude;
-            $room['longitude'] = $longitude;
+            $room['latitude'] = (string)$latitude;
+            $room['longitude'] = (string)$longitude;
         }
+        
         try {
             $user->rooms()->save($room);
         } catch (\Illuminate\Database\QueryException $e) {
