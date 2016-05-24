@@ -80,13 +80,13 @@ class RoomsController extends Controller
         $response = file_get_contents($url);
 
         $output = json_decode($response);
+        if($output->status != "ZERO_RESULTS") {
+            $latitude = $output->results[0]->geometry->location->lat;
+            $longitude = $output->results[0]->geometry->location->lng;
 
-        $latitude = $output->results[0]->geometry->location->lat;
-        $longitude = $output->results[0]->geometry->location->lng;
-
-        $room['latitude'] = $latitude;
-        $room['longitude'] = $longitude;
-
+            $room['latitude'] = $latitude;
+            $room['longitude'] = $longitude;
+        }
         try {
             $user->rooms()->save($room);
         } catch (\Illuminate\Database\QueryException $e) {
